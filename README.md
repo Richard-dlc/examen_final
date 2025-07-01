@@ -38,7 +38,7 @@
 </html>
 
 ## Comandos de CSS
-// Estilo general del cuerpo de la página
+/* Estilo general del cuerpo de la página */
 body {
     font-family: Arial, sans-serif;
     background-color: #f5f8fa;
