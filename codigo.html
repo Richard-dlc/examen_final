@@ -3,6 +3,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora Integral de Triángulos</title>
+
+      <!-- Vinculamos el archivo de estilos CSS -->
     <link rel="stylesheet" href="css/miestilo.css">
 </head>
 <body>
@@ -10,19 +12,24 @@
         <h1>Calculadora Integral de Triángulos</h1>
         <p class="subtitulo">Análisis completo de un triángulo a partir de sus tres lados</p>
 
+          <!-- Formulario para ingresar los lados del triángulo -->
         <div class="formulario">
             <label>Lado a: <input type="number" id="ladoA" /></label>
             <label>Lado b: <input type="number" id="ladoB" /></label>
             <label>Lado c: <input type="number" id="ladoC" /></label>
+
+            <!-- Botón que ejecuta la función calcular() del archivo JS -->
             <button onclick="calcular()">Calcular</button>
         </div>
 
         <!-- Área de dibujo -->
         <canvas id="trianguloCanvas" width="400" height="400"></canvas>
 
+        <!-- Aquí se mostrará el resultado generado por JavaScript -->
         <div class="resultados" id="resultados"></div>
     </div>
 
+     <!-- Vinculamos el archivo JavaScript -->
     <script src="js/mijava_srcp.js"></script>
 </body>
 </html>

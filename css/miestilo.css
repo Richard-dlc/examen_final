@@ -1,3 +1,4 @@
+/* Estilo general del cuerpo de la página */
 body {
     font-family: Arial, sans-serif;
     background-color: #f5f8fa;
@@ -5,34 +6,39 @@ body {
     padding: 0;
 }
 
+/* Contenedor principal del contenido */
 .container {
-    max-width: 900px;
-    margin: 40px auto;
+    max-width: 900px;  /* Ancho máximo */
+    margin: 40px auto;  /* Centrado vertical y horizontal */
     padding: 20px;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff; /* Fondo blanco */
+    border-radius: 12px; /* Bordes redondeados */
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
     text-align: center;
 }
 
+/* Título principal */
 h1 {
-    color: #1d3557;
+    color: #1d3557; /* Azul oscuro */
     margin-bottom: 10px;
 }
 
+/* Subtítulo */
 .subtitulo {
-    color: #457b9d;
+    color: #457b9d;  /* Azul claro */
     margin-bottom: 30px;
 }
 
+/* Formulario de entrada de datos */
 .formulario {
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 15px; /* Espacio entre elementos */
     flex-wrap: wrap;
     margin-bottom: 30px;
 }
 
+/* Estilo de los campos de entrada */
 .formulario input {
     width: 80px;
     padding: 8px;
@@ -40,20 +46,22 @@ h1 {
     border-radius: 6px;
 }
 
+/* Botón de calcular */
 .formulario button {
     padding: 8px 20px;
-    background-color: #1d3557;
+    background-color: #1d3557; /* Azul oscuro */
     color: white;
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s; /* Suaviza el cambio de color al pasar el mouse */
 }
 
 .formulario button:hover {
-    background-color: #457b9d;
+    background-color: #457b9d; /* Color al pasar el mouse */
 }
 
+/* Contenedor de resultados en forma de cuadrícula */
 .resultados {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -61,6 +69,7 @@ h1 {
     text-align: left;
 }
 
+/* Caja de cada resultado */
 .resultado-box {
     background-color: #f1faee;
     border-left: 6px solid #1d3557;
@@ -68,6 +77,7 @@ h1 {
     border-radius: 8px;
 }
 
+/* Título dentro de cada caja de resultados */
 .resultado-box h3 {
     margin-top: 0;
     color: #1d3557;

@@ -1,8 +1,11 @@
+// Función principal que se ejecuta al hacer clic en "Calcular"
 function calcular() {
+    // Obtenemos los valores ingresados por el usuario y los convertimos a números decimales
     const a = parseFloat(document.getElementById("ladoA").value);
     const b = parseFloat(document.getElementById("ladoB").value);
     const c = parseFloat(document.getElementById("ladoC").value);
 
+     // Verificamos si los lados ingresados forman un triángulo válido (desigualdad triangular)
     if (!a || !b || !c || a + b <= c || a + c <= b || b + c <= a) {
         alert("Los lados ingresados no forman un triángulo válido.");
         return;
@@ -11,26 +14,36 @@ function calcular() {
     // Dibujo del triángulo
     dibujarTriangulo(a, b, c);
 
+    // Calculamos el semiperímetro (s) para usar en varias fórmulas
     const s = (a + b + c) / 2;
+
+    // --- ÁREA usando la fórmula de Herón ---
     const area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
+
+    // --- PERÍMETRO ---
     const perimetro = a + b + c;
 
+    // --- ÁNGULOS usando la Ley de Cosenos ---
     const anguloA = radToDeg(Math.acos((b ** 2 + c ** 2 - a ** 2) / (2 * b * c)));
     const anguloB = radToDeg(Math.acos((a ** 2 + c ** 2 - b ** 2) / (2 * a * c)));
-    const anguloC = 180 - anguloA - anguloB;
+    const anguloC = 180 - anguloA - anguloB; // Se deduce el tercer ángulo
 
+     // --- MEDIANAS (desde vértices opuestos) ---
     const ma = 0.5 * Math.sqrt(2 * b ** 2 + 2 * c ** 2 - a ** 2);
     const mb = 0.5 * Math.sqrt(2 * a ** 2 + 2 * c ** 2 - b ** 2);
     const mc = 0.5 * Math.sqrt(2 * a ** 2 + 2 * b ** 2 - c ** 2);
 
+    // --- ALTURAS desde cada lado ---
     const ha = (2 * area) / a;
     const hb = (2 * area) / b;
     const hc = (2 * area) / c;
 
+    // --- BISECTRICES internas desde cada vértice ---
     const ta = calcularBisectriz(b, c, a);
     const tb = calcularBisectriz(a, c, b);
     const tc = calcularBisectriz(a, b, c);
 
+    // Mostramos todos los resultados dentro del contenedor "resultados"
     document.getElementById("resultados").innerHTML = `
         <div class="resultado-box">
             <h3>Ángulos</h3>
@@ -63,12 +76,14 @@ function calcular() {
         </div>
     `;
 }
-
+// Función para convertir radianes a grados sexagesimales
 function radToDeg(r) {
     return r * 180 / Math.PI;
 }
 
+// Función para calcular la longitud de una bisectriz interna desde un vértice
 function calcularBisectriz(b, c, a) {
+    // Esta fórmula deriva de la ley de la bisectriz
     const angulo = Math.acos((b ** 2 + c ** 2 - a ** 2) / (2 * b * c));
     const bisectriz = (2 * b * c * Math.cos(angulo / 2)) / (b + c);
     return bisectriz;
