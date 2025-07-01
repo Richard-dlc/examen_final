@@ -4,68 +4,62 @@ function calcular() {
     const c = parseFloat(document.getElementById("ladoC").value);
 
     if (!a || !b || !c || a + b <= c || a + c <= b || b + c <= a) {
-        alert("Los lados ingresados no forman un tri·ngulo v·lido.");
+        alert("Los lados ingresados no forman un tri√°ngulo v√°lido.");
         return;
     }
 
+    // Dibujo del tri√°ngulo
+    dibujarTriangulo(a, b, c);
+
     const s = (a + b + c) / 2;
-
-    // ¡rea con fÛrmula de HerÛn
     const area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
-
-    // PerÌmetro
     const perimetro = a + b + c;
 
-    // ¡ngulos con Ley de Cosenos
     const anguloA = radToDeg(Math.acos((b ** 2 + c ** 2 - a ** 2) / (2 * b * c)));
     const anguloB = radToDeg(Math.acos((a ** 2 + c ** 2 - b ** 2) / (2 * a * c)));
     const anguloC = 180 - anguloA - anguloB;
 
-    // Medianas
     const ma = 0.5 * Math.sqrt(2 * b ** 2 + 2 * c ** 2 - a ** 2);
     const mb = 0.5 * Math.sqrt(2 * a ** 2 + 2 * c ** 2 - b ** 2);
     const mc = 0.5 * Math.sqrt(2 * a ** 2 + 2 * b ** 2 - c ** 2);
 
-    // Alturas
     const ha = (2 * area) / a;
     const hb = (2 * area) / b;
     const hc = (2 * area) / c;
 
-    // Bisectrices
     const ta = calcularBisectriz(b, c, a);
     const tb = calcularBisectriz(a, c, b);
     const tc = calcularBisectriz(a, b, c);
 
-    // Mostrar resultados
     document.getElementById("resultados").innerHTML = `
         <div class="resultado-box">
-            <h3>¡ngulos</h3>
-            a = ${anguloA.toFixed(2)}∞<br>
-            ﬂ = ${anguloB.toFixed(2)}∞<br>
-            ? = ${anguloC.toFixed(2)}∞
+            <h3>√Ångulos</h3>
+            √Ångulo a (Œ±) = ${anguloA.toFixed(2)}¬∞<br>
+            √Ångulo b (Œ≤) = ${anguloB.toFixed(2)}¬∞<br>
+            √Ångulo c (Œ≥) = ${anguloC.toFixed(2)}¬∞
         </div>
         <div class="resultado-box">
             <h3>Medianas</h3>
-            ma = ${ma.toFixed(2)}<br>
-            mb = ${mb.toFixed(2)}<br>
-            mc = ${mc.toFixed(2)}
+            Mediana ma = ${ma.toFixed(2)}<br>
+            Mediana mb = ${mb.toFixed(2)}<br>
+            Mediana mc = ${mc.toFixed(2)}
         </div>
         <div class="resultado-box">
             <h3>Bisectrices</h3>
-            ta = ${ta.toFixed(2)}<br>
-            tb = ${tb.toFixed(2)}<br>
-            tc = ${tc.toFixed(2)}
+            Bisectriz ta = ${ta.toFixed(2)}<br>
+            Bisectriz tb = ${tb.toFixed(2)}<br>
+            Bisectriz tc = ${tc.toFixed(2)}
         </div>
         <div class="resultado-box">
             <h3>Alturas</h3>
-            ha = ${ha.toFixed(2)}<br>
-            hb = ${hb.toFixed(2)}<br>
-            hc = ${hc.toFixed(2)}
+            Altura ha = ${ha.toFixed(2)}<br>
+            Altura hb = ${hb.toFixed(2)}<br>
+            Altura hc = ${hc.toFixed(2)}
         </div>
         <div class="resultado-box">
-            <h3>PerÌmetro y ¡rea</h3>
-            PerÌmetro = ${perimetro.toFixed(2)}<br>
-            ¡rea = ${area.toFixed(2)}
+            <h3>Per√≠metro y √Årea</h3>
+            Per√≠metro = ${perimetro.toFixed(2)}<br>
+            √Årea = ${area.toFixed(2)}
         </div>
     `;
 }
@@ -75,6 +69,44 @@ function radToDeg(r) {
 }
 
 function calcularBisectriz(b, c, a) {
-    const s = (b + c + a) / 2;
-    return (2 * b * c * Math.cos(radToDeg(Math.acos((b ** 2 + c ** 2 - a ** 2) / (2 * b * c))) / 2)) / (b + c);
+    const angulo = Math.acos((b ** 2 + c ** 2 - a ** 2) / (2 * b * c));
+    const bisectriz = (2 * b * c * Math.cos(angulo / 2)) / (b + c);
+    return bisectriz;
+}
+
+function dibujarTriangulo(a, b, c) {
+    const canvas = document.getElementById("trianguloCanvas");
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const escala = 300 / Math.max(a, b, c);
+    const A = a * escala;
+    const B = b * escala;
+    const C = c * escala;
+
+    const Ax = 50, Ay = 300;
+    const Bx = Ax + C, By = 300;
+
+    const cosGamma = (A**2 + B**2 - C**2) / (2 * A * B);
+    const gamma = Math.acos(cosGamma);
+
+    const Cx = Ax + B * Math.cos(gamma);
+    const Cy = Ay - B * Math.sin(gamma);
+
+    ctx.beginPath();
+    ctx.moveTo(Ax, Ay);
+    ctx.lineTo(Bx, By);
+    ctx.lineTo(Cx, Cy);
+    ctx.closePath();
+    ctx.strokeStyle = "#1d3557";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    ctx.fillStyle = "#a8dadc";
+    ctx.fill();
+
+    ctx.fillStyle = "#000";
+    ctx.font = "16px Arial";
+    ctx.fillText(`a = ${a}`, (Bx + Cx) / 2, (By + Cy) / 2 - 10);
+    ctx.fillText(`b = ${b}`, (Ax + Cx) / 2 - 30, (Ay + Cy) / 2);
+    ctx.fillText(`c = ${c}`, (Ax + Bx) / 2 - 10, Ay + 20);
 }

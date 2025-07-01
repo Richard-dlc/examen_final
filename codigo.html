@@ -1,16 +1,15 @@
-<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora Integral de Tri·ngulos</title>
-    <link rel="stylesheet" href="dw.css">
+    <title>Calculadora Integral de Tri√°ngulos</title>
+    <link rel="stylesheet" href="css/miestilo.css">
 </head>
 <body>
     <div class="container">
-        <h1>Calculadora Integral de Tri·ngulos</h1>
-        <p class="subtitulo">An·lisis completo de un tri·ngulo a partir de sus tres lados</p>
-        
+        <h1>Calculadora Integral de Tri√°ngulos</h1>
+        <p class="subtitulo">An√°lisis completo de un tri√°ngulo a partir de sus tres lados</p>
+
         <div class="formulario">
             <label>Lado a: <input type="number" id="ladoA" /></label>
             <label>Lado b: <input type="number" id="ladoB" /></label>
@@ -18,11 +17,12 @@
             <button onclick="calcular()">Calcular</button>
         </div>
 
-        <div class="resultados" id="resultados">
-            <!-- Los resultados se mostrar·n aquÌ -->
-        </div>
+        <!-- √Årea de dibujo -->
+        <canvas id="trianguloCanvas" width="400" height="400"></canvas>
+
+        <div class="resultados" id="resultados"></div>
     </div>
 
-    <script src="dw.js"></script>
+    <script src="js/mijava_srcp.js"></script>
 </body>
 </html>
